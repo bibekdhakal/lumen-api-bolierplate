@@ -21,9 +21,13 @@ $router->group(['prefix' => 'api', 'middleware' => ['cors']], function () use ($
     $router->group(['middleware' => ['auth:api']], function () use ($router) {
     $router->get('users',  ['uses' => 'Api\UserController@index']);
     $router->get('users/{id}',  ['uses' => 'Api\UserController@show']);
-    $router->post('users',  ['uses' => 'Api\UserController@store']);
     $router->put('users/{id}',  ['uses' => 'Api\UserController@store']);
     $router->delete('users/{id}',  ['uses' => 'Api\UserController@destroy']);
   });
   $router->post('login', 'Api\AuthController@login');
+  $router->post('users',  ['uses' => 'Api\UserController@store']);
+});
+
+$router->get('/debug-sentry', function () {
+  throw new Exception('My first Sentry error!');
 });
